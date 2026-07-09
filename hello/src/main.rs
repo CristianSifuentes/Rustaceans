@@ -45,5 +45,9 @@ fn main() {
     my_bool = true;
     println!("{my_bool}");
     
+
+    // Constants
+    const MY_CONST: &str = "MY";// does not infer at the moment
+
          
 }
