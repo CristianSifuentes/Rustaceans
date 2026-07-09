@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 
 // This is main point entry
 fn main() {
@@ -24,6 +26,7 @@ fn main() {
 
     let mut my_int: i32 = 7;
     my_int = my_int + 4;
+    my_int = 10;
     println!("{my_int}");
     println!("{}", my_int - 1); 
 
@@ -48,6 +51,29 @@ fn main() {
 
     // Constants
     const MY_CONST: &str = "MY";// does not infer at the moment
+    println!("{MY_CONST}");
+
+    // Control flow
+    if my_int == 10 && my_bool{
+        println!("10");
+    } else if my_int == 11 {
+                println!("11");
+
+    }else {
+        println!("no 10");
+    }
+
+    let mut my_list: Vec<&str> = vec!["Angular", "React", "Astro"];
+    my_list.push("Python");
+    my_list.push("NET");
+    my_list.push("Go");
+    my_list.push("SQL");
+    println!("{:?}",my_list);
+    println!("{}", my_list[0]);
+
+    let mut my_hash: HashSet<&str> = vec!["Angular", "React", "Astro"].into_iter().collect();
+    my_hash.insert("Go");
+   println!("{:?}",my_hash);
 
          
 }
