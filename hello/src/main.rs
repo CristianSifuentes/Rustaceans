@@ -12,6 +12,13 @@ fn main() {
 
     my_variable = "Change";
     println!("{my_variable}");
+
+    // Rust is a strong type lenguage
     
+    /*
+    tring is an owned, growable, heap-allocated buffer of UTF-8 encoded bytes, while &str (string slice) is an immutable, borrowed reference to a sequence of UTF-8 bytes stored somewhere else
+     */
+    let my_variable2: String = String::from("This is other string");
+    println!("{my_variable2}");
     
 }
