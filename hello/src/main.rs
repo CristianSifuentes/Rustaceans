@@ -48,6 +48,7 @@ fn main() {
 
     // Constants
     const MY_CONST: &str = "MY";// does not infer at the moment
+    println!("{MY_CONST}")
 
          
 }
