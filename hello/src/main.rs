@@ -24,6 +24,7 @@ fn main() {
 
     let mut my_int: i32 = 7;
     my_int = my_int + 4;
+    my_int = 10;
     println!("{my_int}");
     println!("{}", my_int - 1); 
 
@@ -48,7 +49,17 @@ fn main() {
 
     // Constants
     const MY_CONST: &str = "MY";// does not infer at the moment
-    println!("{MY_CONST}")
+    println!("{MY_CONST}");
+
+    // Control flow
+    if my_int == 10 && my_bool{
+        println!("10");
+    } else if my_int == 11 {
+                println!("11");
+
+    }else {
+        println!("no 10");
+    }
 
          
 }
