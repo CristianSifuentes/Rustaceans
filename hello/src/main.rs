@@ -61,5 +61,7 @@ fn main() {
         println!("no 10");
     }
 
+    let mut my_list: Vec<&str> = vec!["Angular", "React", "Astro"];
+    println!("{:?}",my_list);
          
 }
