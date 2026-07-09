@@ -29,5 +29,21 @@ fn main() {
 
 
     println!("This is a value for my_int: {}", my_int);
+
+    let my_int64: i64 = 7;
+    println!("{my_int64}");
+
+    let my_float: f64 = 6.5;
+    println!("{my_float}");           
+    // my_float = my_float + my_int;   
+    // cannot mutate immutable variable `my_float`rust-analyzerE0384
+
+    let my_float2: f32 = 6.5;
+    println!("{my_float2}"); 
+
+    let mut my_bool: bool = false;
+    my_bool = true;
+    println!("{my_bool}");
     
+         
 }
