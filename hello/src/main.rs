@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 
 // This is main point entry
 fn main() {
@@ -62,6 +64,16 @@ fn main() {
     }
 
     let mut my_list: Vec<&str> = vec!["Angular", "React", "Astro"];
+    my_list.push("Python");
+    my_list.push("NET");
+    my_list.push("Go");
+    my_list.push("SQL");
     println!("{:?}",my_list);
+    println!("{}", my_list[0]);
+
+    let mut my_hash: HashSet<&str> = vec!["Angular", "React", "Astro"].into_iter().collect();
+    my_hash.insert("Go");
+   println!("{:?}",my_hash);
+
          
 }
