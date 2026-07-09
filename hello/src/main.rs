@@ -20,5 +20,14 @@ fn main() {
      */
     let my_variable2: String = String::from("This is other string");
     println!("{my_variable2}");
+
+
+    let mut my_int: i32 = 7;
+    my_int = my_int + 4;
+    println!("{my_int}");
+    println!("{}", my_int - 1); 
+
+
+    println!("This is a value for my_int: {}", my_int);
     
 }
