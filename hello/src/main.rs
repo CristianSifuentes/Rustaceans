@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 
 
 // This is main point entry
@@ -63,6 +63,9 @@ fn main() {
         println!("no 10");
     }
 
+    // Vec
+    // When you need to store a list of items of the same type that can grow
+    // or shrink in size at runtime
     let mut my_list: Vec<&str> = vec!["Angular", "React", "Astro"];
     my_list.push("Python");
     my_list.push("NET");
@@ -70,10 +73,28 @@ fn main() {
     my_list.push("SQL");
     println!("{:?}",my_list);
     println!("{}", my_list[0]);
+    
 
+    //HashSet, When you need to maintain a collection of onique items with no duplicate values, 
+    // require O(1) constant-time lookup performance, or need to perform mathematical set operations
     let mut my_hash: HashSet<&str> = vec!["Angular", "React", "Astro"].into_iter().collect();
     my_hash.insert("Go");
-   println!("{:?}",my_hash);
+    println!("{:?}",my_hash);
+
+    
+
+    // Maps
+    // When you need to associate unique keys with specific values for rapid, 
+    // out-of-order data retrieval    
+    let mut my_map: HashMap<&str, i32> = vec![
+        ("Cris", 36),
+        ("Other", 56),
+        ("Other3", 16)
+        ].into_iter().collect();
+        my_map.insert("insert", 76);
+    println!("{:?}", my_map);
+
+
 
          
 }
