@@ -1,4 +1,4 @@
-use std::collections::{HashMap, HashSet};
+use std::collections::{HashMap, HashSet, btree_map::IntoValues};
 
 
 // This is main point entry
@@ -97,10 +97,24 @@ fn main() {
     println!("{:?}", my_map);
 
     //Bucles
-    for value in my_list {
-        println!("{value}")
+    //& is used when need to reuse using pointer
+    for value in &my_list {
+        println!("list {value}")
     }
 
+    for value in my_hash {
+        println!("hash {}", value);
+    }
+
+    for (key, value     )    in my_map {
+        println!("key {} value {}", key, value)
+    }
+    let mut my_counter: usize = 0;
+    while my_counter < my_list.len() {
+        
+        print!("{}", my_list[my_counter]);
+        my_counter+=1;
+    }
 
 
          
