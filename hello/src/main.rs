@@ -1,4 +1,4 @@
-use std::collections::{HashMap, HashSet, btree_map::IntoValues};
+use std::collections::{HashMap, HashSet};
 
 
 // This is main point entry
@@ -25,7 +25,8 @@ fn main() {
 
 
     let mut my_int: i32 = 7;
-    my_int = my_int + 4;
+    my_int += 4;
+    println!("{my_int}");
     my_int = 10;
     println!("{my_int}");
     println!("{}", my_int - 1); 
@@ -45,6 +46,7 @@ fn main() {
     println!("{my_float2}"); 
 
     let mut my_bool: bool = false;
+    println!("{my_bool}");
     my_bool = true;
     println!("{my_bool}");
     
@@ -118,10 +120,23 @@ fn main() {
     //reuse code and reuse
    my_function();
 
-         
+   let my_struct = MyStruct::new("Cris", 36);
+   println!("{} is {} years old", my_struct.name, my_struct.age);
 }
 
 
 fn my_function(){
     println!("This is a function")
+}
+
+struct MyStruct<'a> {
+    //In Rust, 'a is a lifetime annotation used to track how long a borrowed reference lives. It ensures the compiler prevents dangling pointers and memory safety
+    name: &'a str,
+    age: i32,
+}
+
+impl<'a> MyStruct<'a> {
+    fn new(name: &'a str, age: i32) -> MyStruct<'a> {
+        MyStruct { name, age }
+    }
 }
