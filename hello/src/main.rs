@@ -131,6 +131,7 @@ fn my_function(){
 
 struct MyStruct<'a> {
     //In Rust, 'a is a lifetime annotation used to track how long a borrowed reference lives. It ensures the compiler prevents dangling pointers and memory safety
+    // In Rust, a dangling pointer or reference is a pointer that points to a memory address that has already been freed or reassigned to another value.
     name: &'a str,
     age: i32,
 }
