@@ -1,19 +1,19 @@
-# 🦀 Rustaceans
+# Rustaceans
 
 A hands-on learning log for the [Rust programming language](https://www.rust-lang.org/), following [Rust by Example](https://doc.rust-lang.org/rust-by-example/). Each commit on this repo captures a single concept, building incrementally from "Hello, world!" toward more complete Rust programs.
 
-> **Status:** 🚧 Actively learning — this repo grows one concept (and one commit) at a time.
+> **Status:** Actively learning — this repo grows one concept (and one commit) at a time.
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
-- [Overview](#-overview)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
+- [Overview](#overview)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Running the project](#running-the-project)
-- [Concepts Covered](#-concepts-covered)
+- [Concepts Covered](#concepts-covered)
   - [1. Hello, World!](#1-hello-world)
   - [2. Variables: `let` and `println!`](#2-variables-let-and-println)
   - [3. Mutability with `mut`](#3-mutability-with-mut)
@@ -23,18 +23,22 @@ A hands-on learning log for the [Rust programming language](https://www.rust-lan
   - [7. Control Flow (`if` / `else if` / `else`)](#7-control-flow-if--else-if--else)
   - [8. Collections: `Vec<T>`](#8-collections-vect)
   - [9. Collections: `HashSet<T>`](#9-collections-hashsett)
-- [Commit History Map](#-commit-history-map)
-- [Key Takeaways & Gotchas](#-key-takeaways--gotchas)
-- [Resources](#-resources)
-- [License](#-license)
+  - [10. Collections: `HashMap<K, V>`](#10-collections-hashmapk-v)
+  - [11. Iterating with `for` and `while`](#11-iterating-with-for-and-while)
+  - [12. Functions](#12-functions)
+  - [13. Structs, `impl`, and Lifetimes](#13-structs-impl-and-lifetimes)
+- [Commit History Map](#commit-history-map)
+- [Key Takeaways & Gotchas](#key-takeaways--gotchas)
+- [Resources](#resources)
+- [License](#license)
 
 ---
 
-## 🔎 Overview
+## Overview
 
-This repository is a personal sandbox for learning Rust fundamentals: ownership, types, mutability, control flow, and core collections. Code lives in a single evolving binary crate (`hello`), and each concept is layered on top of the previous one directly in `main.rs`, with comments explaining *why* something behaves the way it does (not just what it does).
+This repository is a personal sandbox for learning Rust fundamentals: ownership, types, mutability, control flow, core collections, loops, functions, structs, and lifetimes. Code lives in a single evolving binary crate (`hello`), and each concept is layered on top of the previous one directly in `main.rs`, with comments explaining *why* something behaves the way it does (not just what it does).
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Rustaceans/
@@ -46,7 +50,7 @@ Rustaceans/
         └── main.rs        ← all concepts explored so far
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -76,7 +80,7 @@ cargo run
 
 ---
 
-## 🧠 Concepts Covered
+## Concepts Covered
 
 Each section below maps to concrete code in [`hello/src/main.rs`](hello/src/main.rs) and the commit that introduced it.
 
@@ -142,7 +146,7 @@ Modern inline interpolation is used throughout via `{variable}` syntax:
 println!("{my_int}");
 ```
 
-> ⚠️ **Gotcha:** `my_float = my_float + my_int` fails to compile — Rust does **not** implicitly coerce between numeric types like `f64` and `i32`.
+> **Gotcha:** `my_float = my_float + my_int` fails to compile — Rust does **not** implicitly coerce between numeric types like `f64` and `i32`.
 
 ### 6. Constants
 *Commit: `35d0ced`, `1551e5e`*
@@ -195,9 +199,99 @@ my_hash.insert("Go");
 println!("{:?}", my_hash);
 ```
 
+### 10. Collections: `HashMap<K, V>`
+*Commit: `7afd322`*
+
+An unordered key-value store for rapid, out-of-order lookups — built the same way as the `HashSet` above, via `.collect()` on an iterator of tuples.
+
+```rust
+use std::collections::HashMap;
+
+let mut my_map: HashMap<&str, i32> = vec![
+    ("Cris", 36),
+    ("Other", 56),
+    ("Other3", 16),
+].into_iter().collect();
+
+my_map.insert("insert", 76);
+println!("{:?}", my_map);
+```
+
+> **Gotcha:** like `HashSet`, a `HashMap` gives no ordering guarantee — iteration order can (and will) differ between runs.
+
+### 11. Iterating with `for` and `while`
+*Commit: `f1e1530`, `ba80f90`*
+
+`for` loops consume an iterator; prefixing the collection with `&` borrows it instead of moving it, so it remains usable afterward.
+
+```rust
+// & borrows my_list — ownership stays with the caller, so my_list
+// can still be used after the loop.
+for value in &my_list {
+    println!("list {value}");
+}
+
+// No & here: my_hash is moved into the loop and dropped when it ends.
+for value in my_hash {
+    println!("hash {value}");
+}
+
+for (key, value) in my_map {
+    println!("key {key} value {value}");
+}
+```
+
+`while` loops are used for manual, index-based iteration:
+
+```rust
+let mut my_counter: usize = 0;
+while my_counter < my_list.len() {
+    print!("{}", my_list[my_counter]);
+    my_counter += 1;
+}
+```
+
+> **Gotcha:** iterating `for value in my_hash` (without `&`) moves `my_hash` — trying to use it again afterward is a compile error (`E0382: use of moved value`).
+
+### 12. Functions
+*Commit: `69d569f`*
+
+Free functions are declared with `fn` and called by name; no forward declaration is needed since Rust resolves items anywhere in scope.
+
+```rust
+fn my_function() {
+    println!("This is a function");
+}
+
+my_function();
+```
+
+### 13. Structs, `impl`, and Lifetimes
+*Commit: `8e696c1`, `f9a670d`*
+
+A `struct` groups related data. When a field borrows data (like `&str`) instead of owning it, the compiler requires a **lifetime annotation** (`'a`) so it can guarantee the borrowed data outlives the struct — preventing a **dangling reference** (a pointer to memory that has already been freed or reassigned).
+
+```rust
+struct MyStruct<'a> {
+    name: &'a str,
+    age: i32,
+}
+
+impl<'a> MyStruct<'a> {
+    fn new(name: &'a str, age: i32) -> MyStruct<'a> {
+        MyStruct { name, age }
+    }
+}
+
+let my_struct = MyStruct::new("Cris", 36);
+println!("{} is {} years old", my_struct.name, my_struct.age);
+```
+
+> **Gotcha:** dropping the `<'a>` annotation gives `E0106: missing lifetime specifier`. The compiler cannot let a struct hold a `&str` without knowing how long that borrow is valid for.
+
 ---
 
-## 🗺️ Commit History Map
+## Commit History Map
 
 A chronological view of how this repo evolved, concept by concept:
 
@@ -216,22 +310,30 @@ A chronological view of how this repo evolved, concept by concept:
 | `4ca58fc` | Control flow: `if` / `else if` / `else` |
 | `7bfc2f6` | Working with `Vec<T>` |
 | `4456861` | `HashSet` and `Vec` basic operations |
+| `7afd322` | Working with `HashMap` and `insert` |
+| `f1e1530` | Working with `for` and list |
+| `ba80f90` | Working with `&` and loops using `Vec`, `HashSet`, `HashMap` |
+| `69d569f` | Getting context for `fn` in Rust |
+| `8e696c1` | Working with `struct` and `'a` |
+| `f9a670d` | Comments on dangling pointers and the `impl` keyword |
 
-## 💡 Key Takeaways & Gotchas
+## Key Takeaways & Gotchas
 
 - **Immutability is the default.** Use `mut` deliberately — it documents intent.
 - **`const` requires an explicit type annotation**; `let` can often infer it.
 - **No implicit numeric coercion.** `i32` + `f64` won't compile — convert explicitly (e.g. `as f64`).
 - **`String` vs `&str`** is really an ownership question: owned & growable vs. borrowed & fixed.
-- **`{:?}`** (debug formatting) is essential for printing collections like `Vec` and `HashSet`.
-- **`HashSet` has no guaranteed order** — don't rely on print output ordering.
+- **`{:?}`** (debug formatting) is essential for printing collections like `Vec`, `HashSet`, and `HashMap`.
+- **`HashSet`/`HashMap` have no guaranteed order** — don't rely on print output ordering.
+- **`&` in a `for` loop borrows instead of moves.** Iterating a collection by value consumes it; iterating `&collection` keeps it usable afterward.
+- **A struct holding a borrowed field needs a lifetime (`'a`).** It's how the compiler proves the borrowed data can't outlive the struct that references it, ruling out dangling references at compile time.
 
-## 📖 Resources
+## Resources
 
 - [Rust by Example](https://doc.rust-lang.org/rust-by-example/) — the primary guide followed in this repo
 - [The Rust Programming Language (the book)](https://doc.rust-lang.org/book/)
 - [Rust Standard Library docs](https://doc.rust-lang.org/std/)
 
-## 📄 License
+## License
 
 See [LICENSE](LICENSE) for details.

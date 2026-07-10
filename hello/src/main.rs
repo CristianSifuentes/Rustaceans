@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 
 
 // This is main point entry
@@ -25,7 +25,8 @@ fn main() {
 
 
     let mut my_int: i32 = 7;
-    my_int = my_int + 4;
+    my_int += 4;
+    println!("{my_int}");
     my_int = 10;
     println!("{my_int}");
     println!("{}", my_int - 1); 
@@ -45,6 +46,7 @@ fn main() {
     println!("{my_float2}"); 
 
     let mut my_bool: bool = false;
+    println!("{my_bool}");
     my_bool = true;
     println!("{my_bool}");
     
@@ -63,6 +65,9 @@ fn main() {
         println!("no 10");
     }
 
+    // Vec
+    // When you need to store a list of items of the same type that can grow
+    // or shrink in size at runtime
     let mut my_list: Vec<&str> = vec!["Angular", "React", "Astro"];
     my_list.push("Python");
     my_list.push("NET");
@@ -70,10 +75,69 @@ fn main() {
     my_list.push("SQL");
     println!("{:?}",my_list);
     println!("{}", my_list[0]);
+    
 
+    //HashSet, When you need to maintain a collection of onique items with no duplicate values, 
+    // require O(1) constant-time lookup performance, or need to perform mathematical set operations
     let mut my_hash: HashSet<&str> = vec!["Angular", "React", "Astro"].into_iter().collect();
     my_hash.insert("Go");
-   println!("{:?}",my_hash);
+    println!("{:?}",my_hash);
 
-         
+    
+
+    // Maps
+    // When you need to associate unique keys with specific values for rapid, 
+    // out-of-order data retrieval    
+    let mut my_map: HashMap<&str, i32> = vec![
+        ("Cris", 36),
+        ("Other", 56),
+        ("Other3", 16)
+        ].into_iter().collect();
+        my_map.insert("insert", 76);
+
+
+    println!("{:?}", my_map);
+
+    //Bucles
+    //& is used when need to reuse using pointer
+    for value in &my_list {
+        println!("list {value}")
+    }
+
+    for value in my_hash {
+        println!("hash {}", value);
+    }
+
+    for (key, value     )    in my_map {
+        println!("key {} value {}", key, value)
+    }
+    let mut my_counter: usize = 0;
+    while my_counter < my_list.len() {
+        
+        print!("{}", my_list[my_counter]);
+        my_counter+=1;
+    }
+    //reuse code and reuse
+   my_function();
+
+   let my_struct = MyStruct::new("Cris", 36);
+   println!("{} is {} years old", my_struct.name, my_struct.age);
+}
+
+
+fn my_function(){
+    println!("This is a function")
+}
+
+struct MyStruct<'a> {
+    //In Rust, 'a is a lifetime annotation used to track how long a borrowed reference lives. It ensures the compiler prevents dangling pointers and memory safety
+    // In Rust, a dangling pointer or reference is a pointer that points to a memory address that has already been freed or reassigned to another value.
+    name: &'a str,
+    age: i32,
+}
+
+impl<'a> MyStruct<'a> {
+    fn new(name: &'a str, age: i32) -> MyStruct<'a> {
+        MyStruct { name, age }
+    }
 }
