@@ -92,7 +92,14 @@ fn main() {
         ("Other3", 16)
         ].into_iter().collect();
         my_map.insert("insert", 76);
+
+
     println!("{:?}", my_map);
+
+    //Bucles
+    for value in my_list {
+        println!("{value}")
+    }
 
 
 
