@@ -1,19 +1,19 @@
-# 🦀 Rustaceans
+# Rustaceans
 
 A hands-on learning log for the [Rust programming language](https://www.rust-lang.org/), following [Rust by Example](https://doc.rust-lang.org/rust-by-example/). Each commit on this repo captures a single concept, building incrementally from "Hello, world!" toward more complete Rust programs.
 
-> **Status:** 🚧 Actively learning — this repo grows one concept (and one commit) at a time.
+> **Status:** Actively learning — this repo grows one concept (and one commit) at a time.
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
-- [Overview](#-overview)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
+- [Overview](#overview)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Running the project](#running-the-project)
-- [Concepts Covered](#-concepts-covered)
+- [Concepts Covered](#concepts-covered)
   - [1. Hello, World!](#1-hello-world)
   - [2. Variables: `let` and `println!`](#2-variables-let-and-println)
   - [3. Mutability with `mut`](#3-mutability-with-mut)
@@ -23,18 +23,18 @@ A hands-on learning log for the [Rust programming language](https://www.rust-lan
   - [7. Control Flow (`if` / `else if` / `else`)](#7-control-flow-if--else-if--else)
   - [8. Collections: `Vec<T>`](#8-collections-vect)
   - [9. Collections: `HashSet<T>`](#9-collections-hashsett)
-- [Commit History Map](#-commit-history-map)
-- [Key Takeaways & Gotchas](#-key-takeaways--gotchas)
-- [Resources](#-resources)
-- [License](#-license)
+- [Commit History Map](#commit-history-map)
+- [Key Takeaways & Gotchas](#key-takeaways--gotchas)
+- [Resources](#resources)
+- [License](#license)
 
 ---
 
-## 🔎 Overview
+## Overview
 
 This repository is a personal sandbox for learning Rust fundamentals: ownership, types, mutability, control flow, and core collections. Code lives in a single evolving binary crate (`hello`), and each concept is layered on top of the previous one directly in `main.rs`, with comments explaining *why* something behaves the way it does (not just what it does).
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Rustaceans/
@@ -46,7 +46,7 @@ Rustaceans/
         └── main.rs        ← all concepts explored so far
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -76,7 +76,7 @@ cargo run
 
 ---
 
-## 🧠 Concepts Covered
+## Concepts Covered
 
 Each section below maps to concrete code in [`hello/src/main.rs`](hello/src/main.rs) and the commit that introduced it.
 
@@ -142,7 +142,7 @@ Modern inline interpolation is used throughout via `{variable}` syntax:
 println!("{my_int}");
 ```
 
-> ⚠️ **Gotcha:** `my_float = my_float + my_int` fails to compile — Rust does **not** implicitly coerce between numeric types like `f64` and `i32`.
+> **Gotcha:** `my_float = my_float + my_int` fails to compile — Rust does **not** implicitly coerce between numeric types like `f64` and `i32`.
 
 ### 6. Constants
 *Commit: `35d0ced`, `1551e5e`*
@@ -197,7 +197,7 @@ println!("{:?}", my_hash);
 
 ---
 
-## 🗺️ Commit History Map
+## Commit History Map
 
 A chronological view of how this repo evolved, concept by concept:
 
@@ -217,7 +217,7 @@ A chronological view of how this repo evolved, concept by concept:
 | `7bfc2f6` | Working with `Vec<T>` |
 | `4456861` | `HashSet` and `Vec` basic operations |
 
-## 💡 Key Takeaways & Gotchas
+## Key Takeaways & Gotchas
 
 - **Immutability is the default.** Use `mut` deliberately — it documents intent.
 - **`const` requires an explicit type annotation**; `let` can often infer it.
@@ -226,12 +226,12 @@ A chronological view of how this repo evolved, concept by concept:
 - **`{:?}`** (debug formatting) is essential for printing collections like `Vec` and `HashSet`.
 - **`HashSet` has no guaranteed order** — don't rely on print output ordering.
 
-## 📖 Resources
+## Resources
 
 - [Rust by Example](https://doc.rust-lang.org/rust-by-example/) — the primary guide followed in this repo
 - [The Rust Programming Language (the book)](https://doc.rust-lang.org/book/)
 - [Rust Standard Library docs](https://doc.rust-lang.org/std/)
 
-## 📄 License
+## License
 
 See [LICENSE](LICENSE) for details.
