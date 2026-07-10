@@ -115,7 +115,13 @@ fn main() {
         print!("{}", my_list[my_counter]);
         my_counter+=1;
     }
-
+    //reuse code and reuse
+   my_function();
 
          
+}
+
+
+fn my_function(){
+    println!("This is a function")
 }
