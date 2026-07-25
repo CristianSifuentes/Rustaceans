@@ -3,13 +3,6 @@
 version = 4
 
 [[package]]
-name = "hello"
-version = "0.1.0"
-dependencies = [
- "hello_macros",
-]
-
-[[package]]
 name = "hello_macros"
 version = "0.1.0"
 dependencies = [
